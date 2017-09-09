@@ -14,7 +14,21 @@ class Util:
         # Uncommenting these three lines will grab the latest game results for 2017, update team ratings accordingly, and make forecasts for upcoming games
         file_2017 = file.replace(".", "_2017.")
         urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv", file_2017)
-        games += [item for item in csv.DictReader(open(file_2017))]
+        team_elos = {}
+        for game in csv.DictReader(open(file_2017)):
+            if game['elo1'] == '':
+                game['elo1'] = team_elos[game['team1']]
+            else:
+                team_elos[game['team1']] = game['elo1']
+            if game['elo2'] == '':
+                game['elo2'] = team_elos[game['team2']]
+            else:
+                team_elos[game['team2']] = game['elo2']
+            if game['result1'] == '':
+                game['result1'] = -1
+            games.append(game)
+
+        # games += [item for item in csv.DictReader(open(file_2017))]
 
         for game in games:
             game['season'], game['neutral'], game['playoff'] = int(game['season']), int(game['neutral']), int(game['playoff'])

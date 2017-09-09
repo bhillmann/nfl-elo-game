@@ -41,8 +41,8 @@ class Forecast:
             game['elo_diff'] = elo_diff
 
             # This is the most important piece, where we set my_prob1 to our forecasted probability
-            if game['elo_prob1'] != None:
-                game['my_prob1'] = 1.0 / (math.pow(10.0, (-elo_diff/400.0)) + 1.0)
+            # if game['elo_prob1'] != None:
+            game['my_prob1'] = 1.0 / (math.pow(10.0, (-elo_diff/400.0)) + 1.0)
 
             # If game was played, maintain team Elo ratings
             if game['score1'] != None:

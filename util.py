@@ -12,9 +12,9 @@ class Util:
         games = [item for item in csv.DictReader(open(file))]
 
         # Uncommenting these three lines will grab the latest game results for 2017, update team ratings accordingly, and make forecasts for upcoming games
-        #file_2017 = file.replace(".", "_2017.")
-        #urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv", file_2017)
-        #games += [item for item in csv.DictReader(open(file_2017))]
+        file_2017 = file.replace(".", "_2017.")
+        urlretrieve("https://projects.fivethirtyeight.com/nfl-api/2017/nfl_games_2017.csv", file_2017)
+        games += [item for item in csv.DictReader(open(file_2017))]
 
         for game in games:
             game['season'], game['neutral'], game['playoff'] = int(game['season']), int(game['neutral']), int(game['playoff'])

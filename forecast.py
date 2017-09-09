@@ -1,7 +1,7 @@
 import csv
 import math
 
-HFA = 65.0     # Home field advantage is worth 65 Elo points
+HFA = 100.0     # Home field advantage is worth 65 Elo points
 K = 20.0       # The speed at which Elo ratings change
 REVERT = 1/3.0 # Between seasons, a team retains 2/3 of its previous season's rating
 
@@ -38,6 +38,7 @@ class Forecast:
 
             # Elo difference includes home field advantage
             elo_diff = team1['elo'] - team2['elo'] + (0 if game['neutral'] == 1 else HFA)
+            game['elo_diff'] = elo_diff
 
             # This is the most important piece, where we set my_prob1 to our forecasted probability
             if game['elo_prob1'] != None:
